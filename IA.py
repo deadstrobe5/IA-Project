@@ -67,6 +67,7 @@ class SearchProblem:
 
             self.heuristicas = [[0]*3 for _ in range(len(self.model))]
             self.paths = [[] for _ in range(3)]
+            self.fathers = [[None]*2 for _ in range(len(self.model))]
             self.init = init
 
             self.BFS_3(init[0], 0)
@@ -237,7 +238,7 @@ class SearchProblem:
                 if (h[nut][n] == h[col][n] and nut != col):
                    print("yo")
                    self.Aast_3_aux(nut, n)
-                   return self.Aast_3_aux(self.init[path_ind], n)
+                   return self.Aast_3_aux(atual, n)
 
             if(k1 == pai and k2 == self.init[path_ind]):
                 break
