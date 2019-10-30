@@ -117,9 +117,9 @@ else:
 
 print("\n(6 val) Exercise 3 - Three agents, No limits (test 2)")
 print("Init [30,40,109] Goal [61,60,71]")
-SP = SearchProblem(goal = [61,60,71], model = U, auxheur=coords)
+SP = SearchProblem(goal = [83,61,71], model = U, auxheur=coords)
 tinit = time.process_time()
-I = [30,40,109]
+I = [61,30,109]
 nn = SP.search(I,limitexp = 2000)
 tend = time.process_time()
 print("%.1fms"%((tend-tinit)*1000))
