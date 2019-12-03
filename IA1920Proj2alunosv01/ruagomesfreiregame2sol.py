@@ -35,8 +35,13 @@ class LearningAgent:
         # a - the index to the action in aa
         def selectactiontolearn(self,st,aa):
                 self.aa = aa
+                lista = []
                 #print(self.q_matrix[st][0:len(aa)])
-                a = self.q_matrix[st].index(numpy.max(self.q_matrix[st][0:len(aa)]))
+                for i in range(0,len(aa)):
+                        print(self.q_matrix[st][aa[i]])
+                        lista.append(self.q_matrix[st][aa[i]])
+                
+                a = self.q_matrix[st].index(numpy.max(lista))
                 return a
 
         # Select one action, used when evaluating
@@ -46,7 +51,12 @@ class LearningAgent:
         # returns
         # a - the index to the action in aa
         def selectactiontoexecute(self,st,aa):
-                a = self.q_matrix[st].index(numpy.max(self.q_matrix[st][0:len(aa)]))
+                lista = []
+                #print(self.q_matrix[st][0:len(aa)])
+                for i in range(0,len(aa)):
+                        lista.append(self.q_matrix[st][aa[i]])
+                
+                a = self.q_matrix[st].index(numpy.max(lista))
                 return a
 
 
@@ -56,7 +66,12 @@ class LearningAgent:
         # a - the index to the action taken
         # r - reward obtained
         def learn(self,ost,nst,a,r):
-                max_b = numpy.max(self.q_matrix[nst][0:len(self.aa)])
+                lista = []
+                #print(self.q_matrix[st][0:len(aa)])
+                for i in range(0,len(self.aa)):
+                        lista.append(self.q_matrix[nst][self.aa[i]])
+                
+                max_b = self.q_matrix[nst].index(numpy.max(lista))
                 original_q = self.q_matrix[ost][a]
 
                 new_q = original_q + L_RATE*(r + DISCOUNT * max_b)

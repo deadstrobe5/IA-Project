@@ -6,6 +6,8 @@ from ruagomesfreiregame2sol import *
 def runagent(A, T, R, I = 1, learningphase=True, nlearn = 1000, ntest = 100):
 
         J = 0
+        print(T[1])
+        return
         if learningphase:
                 n = nlearn
         else:
@@ -20,6 +22,8 @@ def runagent(A, T, R, I = 1, learningphase=True, nlearn = 1000, ntest = 100):
                 else:
                         a = A.selectactiontoexecute(st,aa)
                 try:
+                        print(a)
+                        print(T[st][0][a])
                         nst = T[st][0][a]
                 except:
                         print(st,a)
@@ -33,6 +37,7 @@ def runagent(A, T, R, I = 1, learningphase=True, nlearn = 1000, ntest = 100):
 
                 if learningphase:
                         A.learn(st,nst,a,r)
+                        print("i learn")
                 else:
                         #print(st,nst,a,r)
                         pass
