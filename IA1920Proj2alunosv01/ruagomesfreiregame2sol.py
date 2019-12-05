@@ -3,7 +3,7 @@ import numpy
 
 DISCOUNT = 0.1
 L_RATE = 0.9
-EXPLORE = 0.2
+EXPLORE = 0.1
 
 
 # LearningAgent to implement
@@ -39,8 +39,8 @@ class LearningAgent:
                 for i in range(0,len(aa)):
                         q = self.q_matrix[st][i]
                         if(q is None):
-                                self.q_matrix[st][i] = -1
-                                q = -1
+                                self.q_matrix[st][i] = 1
+                                q = 1
                         lista.append(q)
 
                 qmax = numpy.max(lista)
@@ -63,7 +63,7 @@ class LearningAgent:
                 for i in range(0,len(aa)):
                         q = self.q_matrix[st][i]
                         if(q is None):
-                                q = -1
+                                q = 1
                         lista.append(q)
 
                 qmax = numpy.max(lista)
@@ -91,11 +91,11 @@ class LearningAgent:
                 if (len(lista) != 0):
                         max_b = numpy.max(lista)
                 else:
-                        max_b = -1
+                        max_b = 1
                 
                 original_q = self.q_matrix[ost][a]
 
-                new_q = original_q + L_RATE*(r + DISCOUNT * max_b)
+                new_q = (1-L_RATE)*original_q + L_RATE*(r + DISCOUNT * max_b)
                 #print(new_q)
                 self.q_matrix[ost][a] = new_q
                 
