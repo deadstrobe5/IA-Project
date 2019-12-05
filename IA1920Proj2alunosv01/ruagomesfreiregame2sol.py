@@ -1,8 +1,8 @@
 import random
 import numpy
 
-DISCOUNT = 0.9
-L_RATE = 0.1
+DISCOUNT = 0.1
+L_RATE = 0.9
 
 
 # LearningAgent to implement
@@ -15,10 +15,9 @@ class LearningAgent:
         # nA maximum number of action per state
         def __init__(self,nS,nA):
 
-                self.aa = []
                 self.nS = nS
                 self.nA = nA
-                self.q_matrix = [[0 for i in range(nA)] for j in range(nS)]
+                self.q_matrix = [[None for i in range(nA)] for j in range(nS)]
                 '''
                 for i in range (0, nS):
                         for j in range (0, nA):
@@ -34,14 +33,18 @@ class LearningAgent:
         # returns
         # a - the index to the action in aa
         def selectactiontolearn(self,st,aa):
-                self.aa = aa
                 lista = []
                 #print(self.q_matrix[st][0:len(aa)])
                 for i in range(0,len(aa)):
-                        print(self.q_matrix[st][aa[i]])
-                        lista.append(self.q_matrix[st][aa[i]])
-                
-                a = self.q_matrix[st].index(numpy.max(lista))
+                        q = self.q_matrix[st][i]
+                        if(q is None):
+                                self.q_matrix[st][i] = -1
+                                q = -1
+                        lista.append(q)
+
+                qmax = numpy.max(lista)
+                a = lista.index(qmax)  
+
                 return a
 
         # Select one action, used when evaluating
@@ -54,9 +57,15 @@ class LearningAgent:
                 lista = []
                 #print(self.q_matrix[st][0:len(aa)])
                 for i in range(0,len(aa)):
-                        lista.append(self.q_matrix[st][aa[i]])
-                
-                a = self.q_matrix[st].index(numpy.max(lista))
+                        q = self.q_matrix[st][i]
+                        if(q is None):
+                                q = -1
+                        lista.append(q)
+
+                qmax = numpy.max(lista)
+                a = lista.index(qmax)
+
+                print(aa[a])
                 return a
 
 
@@ -66,12 +75,20 @@ class LearningAgent:
         # a - the index to the action taken
         # r - reward obtained
         def learn(self,ost,nst,a,r):
+
                 lista = []
-                #print(self.q_matrix[st][0:len(aa)])
-                for i in range(0,len(self.aa)):
-                        lista.append(self.q_matrix[nst][self.aa[i]])
+                #print(self.q_matrix[nst])
+                for i in range(0,self.nA):
+                        q = self.q_matrix[nst][i]
+                        if (q is None):     
+                                break
+                        lista.append(q)
+                                
+                if (len(lista) != 0):
+                        max_b = numpy.max(lista)
+                else:
+                        max_b = -1
                 
-                max_b = self.q_matrix[nst].index(numpy.max(lista))
                 original_q = self.q_matrix[ost][a]
 
                 new_q = original_q + L_RATE*(r + DISCOUNT * max_b)

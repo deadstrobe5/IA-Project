@@ -6,15 +6,12 @@ from ruagomesfreiregame2sol import *
 def runagent(A, T, R, I = 1, learningphase=True, nlearn = 1000, ntest = 100):
 
         J = 0
-        print(T[1])
-        return
         if learningphase:
                 n = nlearn
         else:
                 n = ntest
                 
         st = I
-        e = True
         for ii in range(1,n):
                 aa = T[st][0]
                 if learningphase:
@@ -22,22 +19,15 @@ def runagent(A, T, R, I = 1, learningphase=True, nlearn = 1000, ntest = 100):
                 else:
                         a = A.selectactiontoexecute(st,aa)
                 try:
-                        print(a)
-                        print(T[st][0][a])
                         nst = T[st][0][a]
                 except:
                         print(st,a)
                 r = R[st]
                 J += r
                 #print(st,nst,a,r)
-                if (r == 1):
-                        print("CONAAAAAA")
-                else:
-                        print("PIEROCA")
 
                 if learningphase:
                         A.learn(st,nst,a,r)
-                        print("i learn")
                 else:
                         #print(st,nst,a,r)
                         pass
@@ -68,6 +58,7 @@ for nrep in range(0,NREP):
         R[2] = 0
         R[3] = 0
         R[4] = 0
+
         # T contains the list of possible next states
         # T[14][0] - contains the possible next states of state 14
 
