@@ -3,6 +3,7 @@ import numpy
 
 DISCOUNT = 0.1
 L_RATE = 0.9
+EXPLORE = 0.2
 
 
 # LearningAgent to implement
@@ -43,7 +44,10 @@ class LearningAgent:
                         lista.append(q)
 
                 qmax = numpy.max(lista)
-                a = lista.index(qmax)  
+                if random.random() < EXPLORE:
+                        a = random.randrange(0, len(lista))
+                else:
+                        a = lista.index(qmax)  
 
                 return a
 

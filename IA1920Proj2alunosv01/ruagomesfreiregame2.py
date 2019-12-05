@@ -53,11 +53,11 @@ for nrep in range(0,NREP):
 
         T = AA[0]
         R = [-1]*114
-        R[7] = 1
-        R[1] = 0
-        R[2] = 0
-        R[3] = 0
-        R[4] = 0
+        R[57] = 5
+        R[75] = 70
+        R[2] = -1
+        R[3] = -1
+        R[4] = -1
 
         # T contains the list of possible next states
         # T[14][0] - contains the possible next states of state 14
