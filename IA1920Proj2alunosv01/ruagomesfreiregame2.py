@@ -1,7 +1,7 @@
 import pickle
 import random
 import matplotlib.pyplot as plt
-from ruagomesfreiregame2sol import *
+from A023 import *
 
 def runagent(A, T, R, I = 1, learningphase=True, nlearn = 1000, ntest = 100):
 
@@ -42,7 +42,7 @@ def runagent(A, T, R, I = 1, learningphase=True, nlearn = 1000, ntest = 100):
 # due to the randomness in the learning process, we will run everythin NREP times
 # the final grades is based on the average on all of them
 
-NREP = 5
+NREP = 100
 val = [0,0,0,0]
 print("exemplo 1")
 for nrep in range(0,NREP):       
@@ -86,8 +86,7 @@ for nrep in range(0,NREP):
 
         T = AA[0]
         R = [-1]*114
-        R[11] = 70
-        R[57] = 5
+        R[10] = 1
         # T contains the list of possible next states
         # T[14][0] - contains the possible next states of state 14
 

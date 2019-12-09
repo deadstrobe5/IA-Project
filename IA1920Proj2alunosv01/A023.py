@@ -3,7 +3,7 @@
 import random
 import numpy
 
-DISCOUNT = 0.9
+DISCOUNT = 0.1
 L_RATE = 0.9
 EXPLORE = 0.1
 
@@ -21,6 +21,11 @@ class LearningAgent:
                 self.nS = nS
                 self.nA = nA
                 self.q_matrix = [[None for i in range(nA)] for j in range(nS)]
+                '''
+                for i in range (0, nS):
+                        for j in range (0, nA):
+                                self.q_matrix[i][j] = numpy.random.uniform(low = -2, high = 0)
+                '''
                 
               
         
@@ -56,6 +61,7 @@ class LearningAgent:
         # a - the index to the action in aa
         def selectactiontoexecute(self,st,aa):
                 lista = []
+                #print(self.q_matrix[st][0:len(aa)])
                 for i in range(0,len(aa)):
                         q = self.q_matrix[st][i]
                         if(q is None):
@@ -91,6 +97,7 @@ class LearningAgent:
                 original_q = self.q_matrix[ost][a]
 
                 new_q = (1-L_RATE)*original_q + L_RATE*(r + DISCOUNT * max_b)
+                #print(new_q)
                 self.q_matrix[ost][a] = new_q
                 
                 return
